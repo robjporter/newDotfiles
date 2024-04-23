@@ -6,14 +6,17 @@ set -e # bail out early if any command fails
 set -u # fail if we hit unset variables
 set -o pipefail # fail if any component of any pipe fails
 
+brewIn() { if brew ls --versions "$1"; then brew upgrade "$1"; else brew install "$1"; fi }
+brewInCask() { if brew ls --versions "$1"; then brew upgrade "$1"; else brew install --cask "$1"; fi }
+
 if [ "$(uname -s)" == "Darwin" ]; then
     echo "On a Mac progressing"
 
-    brew install jq
-    brew install --cask firefox
-    brew install --cask java
-    brew install --cask iterm2
-    brew install --cask ccat
+    brewIn jq
+    brewInCask firefox
+    brewInCask java
+    brewInCask iterm2
+    brewInCask ccat
     echo "Installed base apps"
 
     # .Net
