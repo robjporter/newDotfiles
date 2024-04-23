@@ -7,56 +7,55 @@ set -u # fail if we hit unset variables
 set -o pipefail # fail if any component of any pipe fails
 
 if [ "$(uname -s)" == "Darwin" ]; then
+    echo "On a Mac progressing"
 
     brew install jq
-
-    brew cask install camtasia
-    brew cask install docker
-    brew cask install firefox
-    brew cask install java
-    brew cask install iterm2
-    brew install ccat
+    brew install --cask firefox
+    brew install --cask java
+    brew install --cask iterm2
+    brew install --cask ccat
+    echo "Installed base apps"
 
     # .Net
-    # brew cask install dotnet
-    brew cask install dotnet-sdk
+    brew install --cask dotnet-sdk
+    echo "Installed SDK's"
 
     # Install go
     brew install golang
     mkdir -p $GOPATH $GOPATH/src $GOPATH/pkg $GOPATH/bin
-
-    # brew cask install istat-menus
+    echo "Installed development languages"
 
     # ZSH install (not Oh my zsh)
     # brew install zsh
     # chsh -s /bin/zsh
     brew install zsh-syntax-highlighting
     brew install zsh-autosuggestions
+    echo "Installed ZSH extensions"
 
     # MSFT Stuff and extensions for VSCode
-    # brew cask install visual-studio
-    brew cask install visual-studio-code
+    brew install --cask visual-studio-code
     sh ./vscode-ext.sh
+    echo "Installed developement apps and plugins"
 
     # install terminal screen recorder
     brew install asciinema
+    echo "Installed screen readers"
 
     # docker stuff
     brew install docker-clean
     brew install docker-completion
     brew install docker-compose-completion
-
-    # Buildpacks
-    brew tap buildpack/tap
-    brew install pack
+    echo "Installed docker extensions"
 
     # Install apps from the store
     # install mas-cli to install from the Mac App store
     brew install mas
+    echo "Installed Mac App Store cli"
 
     # Nerd Fonts
     brew tap caskroom/fonts
-    brew cask install font-hack-nerd-font
+    brew install --cask font-hack-nerd-font
+    echo "Installed fonts"
 
     # get Apple ID
     # echo ""
@@ -69,6 +68,7 @@ if [ "$(uname -s)" == "Darwin" ]; then
     mas install 585829637 # Todoist
     mas install 1176895641 # Spark
     mas install 1295203466 # Microsoft Remote Desktop 
+    echo "Installed Mac App Store apps"
 
 else
     echo "Not running OSX therefore skipping Homebrew install"
